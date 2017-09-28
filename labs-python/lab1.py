@@ -1,5 +1,5 @@
 #import math
-from math import cos, acos, atan
+from math import cos, acos
 a = float(input('Enter a: '))
 x = float(input('Enter x: '))
 G = (4*(-18*(a**2)+3*a*x+10*(x**2)))/(15*(a**2)+29*a*x+12*(x**2))
