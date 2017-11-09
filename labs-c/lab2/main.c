@@ -5,12 +5,12 @@ int main() {
     double a, x, G, F, Y;
     int c;
 
-    printf("Введите a: ");
+    printf("Введите a: "); /*ввод значения а для вычисления дальнейшей формулы */
     scanf("%lf", &a);
-    printf("Введите х: ");
+    printf("Введите х: "); /*ввод значения х для вычисления дальнейшей формулы */
     scanf("%lf", &x);
-    printf("enter c = 1 or 2 or 3: ");
-    scanf("%d", &c);
+    printf("enter c = 1 or 2 or 3: "); 
+    scanf("%d", &c); /*выбор формулы для вычисления*/
     switch (c) {
         case 1:
             G = (4 * (-18 * pow(a, 2) + 3 * a * x + 10 * pow(x, 2))) / (15 * pow(a, 2) + 29 * a * x + 12 * pow(x, 2));
