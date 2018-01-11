@@ -1,0 +1,113 @@
+#include <stdio.h> 
+#include <string.h> 
+#include <math.h> 
+#include <stdlib.h> 
+
+int main() { 
+
+FILE *file_write, *file_read; 
+
+struct mas_struct { 
+double G; 
+double F; 
+double Y; 
+} functions; 
+
+struct mas_struct item[100]; 
+
+double a, x, d, xmin, xmax, s = 0, steps; 
+int i = 0; 
+char value[100]; 
+
+printf("Введите минимальное значение х: ");/* Ввод минимального значения x */ 
+scanf("%s", &value); 
+xmin = atof(value); 
+
+printf("Введите максимальное значение x: "); /*Ввод максимального значения x */ 
+scanf("%s", &value); 
+xmax = atof(value); 
+
+printf("Введите а: "); 
+scanf("%s", &value); 
+a = atof(value); 
+
+printf("Введите количество шагов:\n"); 
+scanf("%s", &value); 
+steps = atoi(value); 
+s = (xmax - xmin) / (steps - 1); 
+
+i = 0; 
+
+x = xmin; 
+
+while ((x <= xmax) && (i <= steps)) { 
+d = (15*pow(a,2)+29*a*x+12*pow(x,2)); 
+if (fabs(d) < (10e-6)) { 
+printf("Введенные значения не входят в область определния ф-ции \n"); 
+} else { 
+item[i].G = (4*(-18*pow(a,2)+3*a*x+10*pow(x,2)))/(15*pow(a,2)+29*a*x+12*pow(x,2));  
+printf("G=%lf\n", item[i].G); 
+} 
+i++; 
+if (i > 100) { 
+printf("Массив переполнен."); 
+break; 
+} 
+x += s; 
+} 
+printf("--------------------------------------------------------------------------\n"); 
+
+i = 0; 
+
+x = xmin; 
+
+while ((x <= xmax) && (i <= steps)) { 
+d = cos(5*pow(a,2)+14*a*x-3*pow(x,2))  
+if (fabs(d) < (10e-6)) { 
+printf("Введенные значения не входят в область определния ф-ции\n"); 
+} else { 
+item[i].F = 1/(cos(5*pow(a,2)+14*a*x-3*pow(x,2))); 
+printf("F= %0.18lf\n", item[i].F); 
+} 
+i++; 
+if (i > 100) { 
+printf("Массив переполнен."); 
+break; 
+} 
+x += s; 
+} 
+printf("--------------------------------------------------------------------------\n"); 
+
+i = 0; 
+
+x = xmin; 
+
+while ((x <= xmax) && (i <= s)) { 
+item[i].Y = acos(9*pow(a,2)+42*a*x+40*pow(x,2)+1);  
+printf("Y= %lf\n", item[i].Y); 
+} 
+i++; 
+if (i > 100) { 
+printf("Массив переполнен."); 
+break; 
+} 
+x += s; 
+} 
+printf("--------------------------------------------------------------------------\n"); 
+
+file_write = fopen("/home/valery/lab-07/file.txt", "w"); 
+for (i = 0; i < steps; i++) { 
+fprintf(file_write, "%lf, %0.18lf, %lf\n", item[i].G, item[i].F, item[i].Y); 
+} 
+fclose(file_write); 
+
+file_read = fopen("/home/valery/lab-07/file.txt", "r"); 
+while (!feof(file_read)) { 
+double g1,f1,y1; 
+fscanf(file_read, "%lf, %lf, %lf\n", &g1, &f1, &y1); 
+printf("G = %lf, F = %0.18lf, Y = %lf\n", g1, f1, y1); 
+} 
+fclose(file_read); 
+
+return 0; 
+}
